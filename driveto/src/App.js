@@ -1,16 +1,14 @@
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import React from "react";
+import Navbar from "./Components/Navbar";
+import Options from "./Components/Options";
+import Home from "./Screens/Home";
 
 function App() {
   return (
     <>
-    <Navbar/>
-    <Home/>
+    <Home></Home>
+    <Navbar></Navbar>
+    <Options></Options>
     </>
   );
 }
