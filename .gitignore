@@ -1,1 +1,19 @@
+<<<<<<< HEAD
 node_modules
+=======
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Optional
+.env
+>>>>>>> 2f74d055518f506858ab912bbcc8d0709a28bafa
