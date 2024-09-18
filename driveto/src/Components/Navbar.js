@@ -1,36 +1,97 @@
-import React from 'react'
+import React from 'react';
+import { NavLink } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./Navbar.css";
 
 export default function Navbar() {
   return (
     <div>
-       <nav className="navbar navbar-expand-lg navbar-light bg-light mt-4">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light mt-4 navy">
         <div className="container-fluid">
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
+          
+          <ul className="navbar-nav me-auto">
+            <li className="nav-item mx-3">
+              <NavLink
+                className="nav-link"
+                to="/"
+                end // This ensures the Home link is only active on the root path "/"
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal',
+                  
+                })}
+              >
+                Home
+              </NavLink>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">About</a>
+            <li className="nav-item mx-3">
+              <NavLink
+                className="nav-link"
+                to="/about"
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal',
+                  
+                })}
+              >
+                About
+              </NavLink>
             </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="workDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li className="nav-item dropdown mx-3">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="workDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Work With Us
               </a>
               <ul className="dropdown-menu" aria-labelledby="workDropdown">
-                <li><a className="dropdown-item" href="#">Driver</a></li>
-                <li><a className="dropdown-item" href="#">Rent Your Car</a></li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/driver"
+                    style={({ isActive }) => ({
+                      fontWeight: isActive ? 'bold' : 'normal',
+                      
+                    })}
+                  >
+                    Driver
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/rent-your-car"
+                    style={({ isActive }) => ({
+                      fontWeight: isActive ? 'bold' : 'normal',
+                      
+                    })}
+                  >
+                    Rent Your Car
+                  </NavLink>
+                </li>
               </ul>
             </li>
-            <li className="nav-item ms-auto">
-              <a className="nav-link" href="#">Login</a>
-            </li>
+          </ul>
+
+          {/* Right-aligned nav items */}
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link" href="#">Sign Up</a>
+              <NavLink
+                className="nav-link"
+                to="/login"
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal',
+                  
+                })}
+              >
+                Login
+              </NavLink>
             </li>
           </ul>
         </div>
       </nav>
     </div>
-  )
+  );
 }
