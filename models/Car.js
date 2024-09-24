@@ -13,6 +13,10 @@ const CarSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    numberplate: {
+        type: String,
+        required: true
+    }
     // Add other relevant fields here
 });
 
