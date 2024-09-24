@@ -2,9 +2,10 @@ const express = require('express');
 const connectDB = require('./db'); // Import the function
 const app = express();
 const port = process.env.PORT || 5000;
-
+const cors = require('cors');
 // Connect to the database
 connectDB();
+app.use(cors());
 
 // Middleware
 app.use(express.json());
