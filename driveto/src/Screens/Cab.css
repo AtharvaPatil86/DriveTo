@@ -1,0 +1,69 @@
+/* Cab.css */
+
+/* Align container further to the left */
+.container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between items */
+    align-items: flex-start;
+    max-width: 55%; /* Allow full width */
+    margin-left: 15px; /* Ensure it's aligned to the left */
+    padding-left: 0; /* Remove padding from the left */
+  }
+  
+  /* Add padding and box shadow for the form */
+  .booking-form {
+    flex: 0 0 40%; /* Take up 40% of the width */
+    margin-right: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Corrected the typo in the class name */
+  .car-types-container {
+    flex: 0 0 55%; /* Take up 55% of the width */
+  }
+  
+  /* Style the labels and inputs */
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  
+  .btn-dark {
+    width: 100%;
+    background-color: #01070e;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  /* Style for booking details card */
+  .card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .card strong {
+    font-weight: bold;
+  }
+  
+  h3.text-center {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  

@@ -1,0 +1,46 @@
+/* Align container for both the form and truck types */
+.container {
+    display: flex;
+    justify-content: space-between; /* Space between the form and the truck types */
+    align-items: flex-start;
+    max-width: 1000px; /* Increase the max width to allow space for both components */
+    margin: auto;
+    padding-left: 0;
+}
+
+/* Styling for the form (LocationForm) on the left side */
+.booking-form {
+    flex: 0 0 40%; /* Form takes up 40% of the total width */
+    margin-right: 20px; /* Add space between form and truck types */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Right side container for TruckTypes */
+.right-side {
+    flex: 0 0 55%; /* Truck types take up 55% of the total width */
+    padding-left: 20px; /* Add some padding on the left */
+}
+
+/* Form field styles */
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.btn-dark {
+    width: 100%;
+    background-color: #01070e;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}

@@ -1,0 +1,57 @@
+/* TruckTypes.css */
+
+/* Styling the container that holds all truck types */
+.truck-types-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the truck boxes */
+    margin-top: 0px;
+    max-width: 100%; /* Ensure it does not exceed the parent container */
+}
+
+/* Each truck box container */
+.truck-box {
+    width: 750px; /* Fixed width for the truck boxes */
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 10px; /* Use margin to create space around each box */
+    margin-left: 200px; /* Increase left margin */
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+}
+
+/* Image styling */
+.truck-image {
+    width: 150px; /* Set width for truck image */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 20px; /* Space between image and text */
+}
+
+/* Truck name and company at the top */
+.truck-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Styling individual details */
+.details {
+    flex: 1; /* Take remaining space */
+    display: flex;
+    flex-direction: column; /* Stack details vertically */
+}
+
+p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Positioning the price at the bottom left */
+.price-bottom-left {
+    margin-top: auto; /* Push to the bottom */
+    font-weight: bold;
+    color: #010408;
+}
