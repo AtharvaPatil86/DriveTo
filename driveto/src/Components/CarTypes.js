@@ -1,70 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CarTypes.css'; // Importing the CSS for styling
+import mini from '../Images/mini.webp'
+import sedan from '../Images/sedan.webp'
+import suv from '../Images/suv.webp'
 
 export default function CarTypes() {
   // Sample data for car types
   const tempCars = [
-    {
-      name: 'Sedan',
-      company: 'Toyota',
-      transmission: 'Automatic',
-      fuelType: 'Petrol',
-      capacity: 5,
-      insurance: 'Comprehensive',
-      price: 5000,
-    },
-    {
+    { image: `${mini}`,
       name: 'Mini',
-      company: 'Suzuki',
-      transmission: 'Manual',
-      fuelType: 'CNG',
       capacity: 4,
-      insurance: 'Basic',
-      price: 3000,
     },
-    {
+    {  
+      image: `${sedan}`,
+      name: 'Sedan',
+      capacity: 5,
+    },
+    { 
+      image: `${suv}`,
       name: 'SUV',
-      company: 'Ford',
-      transmission: 'Automatic',
-      fuelType: 'Diesel',
       capacity: 7,
-      insurance: 'Comprehensive',
-      price: 8000,
-    },
-    {
-      name: 'Hatchback',
-      company: 'Hyundai',
-      transmission: 'Manual',
-      fuelType: 'Petrol',
-      capacity: 5,
-      insurance: 'Basic',
-      price: 4000,
-    },
-    {
-      name: 'Luxury',
-      company: 'BMW',
-      transmission: 'Automatic',
-      fuelType: 'Petrol',
-      capacity: 5,
-      insurance: 'Premium',
-      price: 15000,
     },
   ];
+
+  // State to track the selected car
+  const [selectedCarIndex, setSelectedCarIndex] = useState(null);
+
+  // Function to handle click on car box
+  const handleCarClick = (index) => {
+    setSelectedCarIndex(index);
+  };
 
   return (
     <div className="car-types-container">
       {tempCars.map((car, index) => (
-        <div className="car-box shadow-lg" key={index}>
+        <div
+          className={`car-box shadow-lg ${
+            selectedCarIndex === index ? 'selected' : ''
+          }`}
+          key={index}
+          onClick={() => handleCarClick(index)}
+        >
           <img src={car.image} alt={`${car.name}`} className="car-image" />
           <div className="details">
-            <h3 className="car-name">{car.name} - {car.company}</h3>
-            <p><strong>Transmission:</strong> {car.transmission}</p>
-            <p><strong>Fuel Type:</strong> {car.fuelType}</p>
+            <h1 className="car-name">{car.name}</h1>
             <p><strong>Capacity:</strong> {car.capacity} people</p>
-            <p><strong>Insurance:</strong> {car.insurance}</p>
-            <div className="price-bottom-left">
-              <strong>Price:</strong> ₹{car.price}
-            </div>
           </div>
         </div>
       ))}

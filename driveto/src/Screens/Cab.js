@@ -11,7 +11,7 @@ export default function Cab({ pickUpLocation, dropOffLocation, startDate, endDat
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container1 mt-5">
       <div className="left-side">
         <LocationForm
           pickUpLocation={pickUpLocation}
@@ -21,19 +21,6 @@ export default function Cab({ pickUpLocation, dropOffLocation, startDate, endDat
           onSubmit={handleFormSubmit}  // Pass the form submission handler
         />
       </div>
-
-      {/* Conditionally display booking info after form submission */}
-      {submittedData && (
-        <div className="mt-5">
-          <h3 className="text-center">Booking Details</h3>
-          <div className="card p-4">
-            <p><strong>Pick-up Location:</strong> {submittedData.pickUpLocation}</p>
-            <p><strong>Drop-off Location:</strong> {submittedData.dropOffLocation}</p>
-            <p><strong>Start Date:</strong> {submittedData.startDate}</p>
-            <p><strong>End Date:</strong> {submittedData.endDate}</p>
-          </div>
-        </div>
-      )}
 
       <CarTypes />  {/* Display Car Types */}
     </div>

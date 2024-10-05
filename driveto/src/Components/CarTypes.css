@@ -7,12 +7,12 @@
     justify-content: center; /* Centers the car boxes */
     margin-top: 0px;
     max-width: 100%; /* Ensure it does not exceed the parent container */
-}
-
-/* Each car box container */
-.car-box {
+  }
+  
+  /* Each car box container */
+  .car-box {
     width: 750px; /* Fixed width for the car boxes */
-    height: 400px;
+    height: 170px;
     background-color: #ffffff;
     border-radius: 10px;
     margin: 10px; /* Use margin to create space around each box */
@@ -21,37 +21,47 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Center items vertically */
-}
-
-/* Image styling */
-.car-image {
+    transition: all 0.3s ease; /* Smooth transition for selection */
+    cursor: pointer; /* Change cursor to pointer for clickable boxes */
+  }
+  
+  /* Image styling */
+  .car-image {
     width: 150px; /* Set width for car image */
     height: auto; /* Maintain aspect ratio */
     margin-right: 20px; /* Space between image and text */
-}
-
-/* Car name and company at the top */
-.car-name {
+  }
+  
+  /* Car name and company at the top */
+  .car-name {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
-}
-
-/* Styling individual details */
-.details {
+  }
+  
+  /* Styling individual details */
+  .details {
     flex: 1; /* Take remaining space */
     display: flex;
     flex-direction: column; /* Stack details vertically */
-}
-
-p {
+  }
+  
+  p {
     font-size: 14px;
     margin: 5px 0;
-}
-
-/* Positioning the price at the bottom left */
-.price-bottom-left {
+  }
+  
+  /* Positioning the price at the bottom left */
+  .price-bottom-left {
     margin-top: auto; /* Push to the bottom */
     font-weight: bold;
     color: #010408;
-}
+  }
+  
+  /* Highlighted and expanded car box when selected */
+  .car-box.selected {
+    background-color: #f0f8ff; /* Light background for selection */
+    border: 2px solid #007bff; /* Highlight border */
+    transform: scale(1.05); /* Slightly expand the selected car box */
+  }
+  
