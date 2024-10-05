@@ -1,8 +1,9 @@
 /* Cab.css */
 
 /* Align container further to the left */
-.container {
+.container1 {
     display: flex; /* Use flexbox for layout */
+    
     justify-content: space-between; /* Space between items */
     align-items: flex-start;
     max-width: 55%; /* Allow full width */

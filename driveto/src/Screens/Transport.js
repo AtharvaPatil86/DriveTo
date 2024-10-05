@@ -18,7 +18,7 @@ const Transport = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container1 mt-5">
       <div className="left-side">
         {/* Pass down state variables and the form submission handler */}
         <LocationForm
