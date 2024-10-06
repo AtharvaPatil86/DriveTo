@@ -1,34 +1,24 @@
 const mongoose = require('mongoose');
 
-const CarSchema = new mongoose.Schema({
+const TruckSchema = new mongoose.Schema({
     make: {
         type: String,
-        
         required: true
     },
     type:{
         type:String,
-        enum:['Sedan','SUV','Mini'],
+        enum:['Big','Medium','small'],
         required: true
     },
-
     model: {
         type: String,
-        required: true
-    },
-    year: {
-        type: Number,
         required: true
     },
     numberplate: {
         type: String,
         required: true
-    },
-    status: {
-        type: Boolean,
-        default: true // Assuming 'true' means available for rent
     }
     // Add other relevant fields here
 });
 
-module.exports = mongoose.model('Car', CarSchema);
+module.exports = mongoose.model('Truck', Truck);

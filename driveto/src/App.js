@@ -9,6 +9,7 @@ import ResetPassword from "./Screens/ResetPassword";
 import Cab from './Screens/Cab';
 import Transport from './Screens/Transport';
 import Rent from './Screens/Rent';
+import Book from './Screens/Book';
 
 
 import "./App.css";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cab" element={<Cab/>}/>
         <Route path="/transport" element={<Transport/>}/>
         <Route path="/rentacar" element={<Rent/>}/>
+        <Route path="/book" element={<Book/>}/>
 
 
       </Routes>

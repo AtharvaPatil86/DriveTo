@@ -10,6 +10,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "mongoose": "^8.6.2",
+    "node-cron": "^3.0.3",
     "nodemailer": "^6.9.15",
     "react-bootstrap": "^2.10.4",
     "react-router-dom": "^6.26.2"
