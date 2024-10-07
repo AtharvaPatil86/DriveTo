@@ -1,0 +1,159 @@
+[33mcommit 85c5610746c4df056bfbd7ff689cd43cdc079ef6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Sun Oct 6 10:30:54 2024 +0530
+
+    added driver form in work with us also changes in backend and data schema
+
+[33mcommit c27893a93b6119d6549d3596a43b31e5723efbda[m
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Sat Oct 5 15:20:15 2024 +0530
+
+    hi
+
+[33mcommit fe31576ea585449b8e7dd56fe1154e060207cbc3[m
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Sat Oct 5 15:12:27 2024 +0530
+
+    Hello
+
+[33mcommit 9b73765f5864d71469e7931dd1c51a9b201fa80a[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Sat Oct 5 12:20:09 2024 +0530
+
+    added transport page and cab page
+
+[33mcommit e83f0d797c7f69db7b7e8eb9a06409bb19fc0dc8[m
+Merge: ab3092c 7e046eb
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Tue Sep 24 18:27:11 2024 +0530
+
+    Merge branch 'main' of https://github.com/AtharvaPatil86/DriveTo
+
+[33mcommit ab3092cad55646e657f20f83525b968ae94ba423[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Tue Sep 24 18:25:41 2024 +0530
+
+    Updated files and added ResetPassword feature
+
+[33mcommit 7e046eb34f8e34568746cbefd3db0daee26824d1[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Tue Sep 24 18:18:59 2024 +0530
+
+    Updated files and added ResetPassword feature
+
+[33mcommit ffff1cc85409f922081c2b0b15cccb809096fe3e[m
+Merge: c456007 2f74d05
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Wed Sep 18 16:41:49 2024 +0530
+
+    hello
+
+[33mcommit c45600762d2c4ab9deb9335443826549b2daddb6[m
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Wed Sep 18 15:20:10 2024 +0530
+
+    hello
+
+[33mcommit 2f74d055518f506858ab912bbcc8d0709a28bafa[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Wed Sep 18 12:30:37 2024 +0530
+
+    cleared frontend
+
+[33mcommit 83749a08fe36a7528b099b615bf18d45f298aab4[m
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Wed Sep 18 05:36:46 2024 +0530
+
+    Atharva
+
+[33mcommit 7976991944dff469c9f21f1b053b6d3c11f75ffe[m
+Merge: 91c5be5 d9a68b8
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Tue Sep 17 10:37:20 2024 +0530
+
+    Resolved merge conflict in App.js
+
+[33mcommit 91c5be5aad395c0702db9b0171ad7b4ce80bde54[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Tue Sep 17 10:09:28 2024 +0530
+
+    Commit additional project changes
+
+[33mcommit 468ba3e15eae2d591a126568bf157d31be5903e2[m
+Author: laukik86 <laukikpadgaonkar0@gmail.com>
+Date:   Tue Sep 17 10:08:37 2024 +0530
+
+    Add .gitignore to exclude node_modules and other dependencies
+
+[33mcommit d9a68b8fb804f00d075361e0c44f8ad17a0f231a[m
+Merge: 2b1e89f d2e4671
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Sun Sep 15 00:01:58 2024 +0530
+
+    atharva
+
+[33mcommit 2b1e89f2e9a0450b2232ab08c633fce88fa0ea1f[m
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Sat Sep 14 23:51:47 2024 +0530
+
+    home page
+
+[33mcommit d2e46710ff122d24c638cb2641e1563f3a42a142[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:18:33 2024 +0530
+
+    Delete package.json
+
+[33mcommit 83044ce3c7f191aa05743b90814f6deb93f9a6d0[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:18:02 2024 +0530
+
+    Delete package-lock.json
+
+[33mcommit 1c41cfd2c7cd3dd4a6ad131a0c45010939194890[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:17:24 2024 +0530
+
+    Delete driveto directory
+
+[33mcommit 5509afaa1095811b23ba8bd7d55111bba3d28ea9[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:15:52 2024 +0530
+
+    Add files via upload
+
+[33mcommit 563186fde20ea76bb885547feb85af4f10e0fade[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:14:43 2024 +0530
+
+    Create hello.txt
+
+[33mcommit e14dc3247a5d466b3288279780b0dc395fada5e8[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:11:15 2024 +0530
+
+    Create README.md
+
+[33mcommit c2beaed5659af4d99e4095c686492ebf7f10221d[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:10:44 2024 +0530
+
+    Delete README.md
+
+[33mcommit 735cc00c04e9c6f9eb172e951642211d5943e95d[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Sep 14 23:08:41 2024 +0530
+
+    Delete driveto directory
+
+[33mcommit a29966b55a152182a420aada6a5dad9e9e338abf[m
+Author: AtharvaPatil86 <atharvapatil619@gmail.com>
+Date:   Sun Aug 25 00:06:20 2024 +0530
+
+    message
+
+[33mcommit 0e061fa2452fcf9a05e3dbeee6cc35ad248c08db[m
+Author: AtharvaPatil86 <146982838+AtharvaPatil86@users.noreply.github.com>
+Date:   Sat Aug 24 22:51:20 2024 +0530
+
+    Initial commit

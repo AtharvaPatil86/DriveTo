@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 import './CarTypes.css'; // Importing the CSS for styling
-import mini from '../Images/mini.webp'
-import sedan from '../Images/sedan.webp'
-import suv from '../Images/suv.webp'
+import mini from '../Images/mini.webp';
+import sedan from '../Images/sedan.webp';
+import suv from '../Images/suv.webp';
 
-export default function CarTypes() {
+export default function CarTypes({ onSelectCar }) { // Add onSelectCar prop
   // Sample data for car types
   const tempCars = [
-    { image: `${mini}`,
-      name: 'Mini',
-      capacity: 4,
-    },
-    {  
-      image: `${sedan}`,
-      name: 'Sedan',
-      capacity: 5,
-    },
-    { 
-      image: `${suv}`,
-      name: 'SUV',
-      capacity: 7,
-    },
+    { image: `${mini}`, name: 'Mini', capacity: 4 },
+    { image: `${sedan}`, name: 'Sedan', capacity: 5 },
+    { image: `${suv}`, name: 'SUV', capacity: 7 },
   ];
 
   // State to track the selected car
@@ -29,6 +18,7 @@ export default function CarTypes() {
   // Function to handle click on car box
   const handleCarClick = (index) => {
     setSelectedCarIndex(index);
+    onSelectCar(tempCars[index]); // Call the onSelectCar function with the selected car's details
   };
 
   return (

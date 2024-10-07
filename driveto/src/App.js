@@ -10,7 +10,7 @@ import Cab from './Screens/Cab';
 import Transport from './Screens/Transport';
 import Rent from './Screens/Rent';
 import Book from './Screens/Book';
-
+import Previous_Bookings from './Screens/Previous_Bookings';
 
 import "./App.css";
 
@@ -29,6 +29,8 @@ function App() {
         <Route path="/transport" element={<Transport/>}/>
         <Route path="/rentacar" element={<Rent/>}/>
         <Route path="/book" element={<Book/>}/>
+        <Route path="/Booking" element={<Previous_Bookings/>}/>
+        
 
 
       </Routes>

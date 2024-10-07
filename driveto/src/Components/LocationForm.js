@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import './LocationForm.css'
-export default function LocationForm({ pickUpLocation, dropOffLocation, startDate, endDate, onSubmit }) {
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './LocationForm.css';
+
+export default function LocationForm({ pickUpLocation, dropOffLocation, startDate, endDate, onSubmit, selectedCar }) {
   const [formData, setFormData] = useState({
     pickUpLocation: pickUpLocation || '',
     dropOffLocation: dropOffLocation || '',
     startDate: startDate || '',
     endDate: endDate || '',
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +22,15 @@ export default function LocationForm({ pickUpLocation, dropOffLocation, startDat
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData); // Call the onSubmit function passed from parent
+    onSubmit(formData); // Call the onSubmit function passed from the Cab component
+
+    // Navigate to the Book page with the submitted form data and selected car
+    navigate('/book', {
+      state: {
+        car: selectedCar, // Pass the selected car from props
+        bookingDetails: formData, // Pass form data
+      },
+    }); // Adjust this path if needed
   };
 
   return (

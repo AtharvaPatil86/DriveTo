@@ -1,0 +1,33 @@
+.previous-bookings-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.booking-box {
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  width: 100%; /* Full width of the container */
+  max-width: 700px; /* Limit the max width for better readability */
+  margin: 0 auto 20px auto; /* Center align the box */
+  text-align: left;
+}
+
+.car-name {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
