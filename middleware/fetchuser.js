@@ -1,31 +1,32 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey123'; // Use environment variable for security
+const User = require('../models/User');
 
-const fetchuser = (req, res, next) => {
+module.exports = async function (req, res, next) {
+    // Retrieve token from the request body
+    const token = req.body.token;
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided, authorization denied' });
+    }
+
     try {
-        // Get token from Authorization header or from body as fallback
-        const token = req.headers.authorization?.split(' ')[1] || req.body.token;
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // Check if the token exists
-        if (!token) {
-            return res.status(401).json({ error: 'Token is missing' });
+        // Fetch user details from the database using the user ID in the token payload
+        const user = await User.findById(decoded.id).select('-password'); // Exclude password
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        // Verify the JWT token
-        jwt.verify(token, JWT_SECRET, (err, decoded) => {
-            if (err) {
-                console.error("Token verification failed:", err); // Log the error
-                return res.status(403).json({ error: 'Invalid token' });
-            }
+        // Attach the user details to the request object
+        req.user = user;
 
-            // Attach user data to request object (decoded token contains user info)
-            req.user = decoded;
-            next(); // Proceed to the next middleware
-        });
+        // Proceed to the next middleware or route handler
+        next();
     } catch (error) {
-        console.error("Error in token validation:", error); // Log any unexpected errors
-        res.status(500).json({ error: 'Server error' });
+        console.error(error.message);
+        res.status(401).json({ message: 'Token is not valid' });
     }
 };
-
-module.exports = fetchuser;

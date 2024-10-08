@@ -2,65 +2,45 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const Booking = require('../models/Booking'); // Booking model
+const Car = require('../models/Car'); // Import Car model to fetch car details
 const JWT_SECRET = 'your_secret_key'; // Replace with process.env.JWT_SECRET
+const fetchUser = require('../middleware/fetchUser');
 
 // POST /api/bookings - Create a new booking
-router.post('/', async (req, res) => {
+router.post('/', fetchUser, async (req, res) => {
+    const { rentalStartDate, rentalEndDate, totalCost } = req.body;
+
     try {
-        // Extract the token from the Authorization header
-        const token = req.headers.authorization?.split(' ')[1]; // Bearer token
+        // Fetch the first available car from the Car model
+        const car = await Car.findOne(); // Modify this to include any specific conditions if needed
 
-        // Extract booking data from the request body
-        const { car, rentalStartDate, rentalEndDate, totalCost } = req.body;
-
-        // Verify the JWT token
-        if (!token) {
-            return res.status(401).json({ error: 'Token is missing' });
+        if (!car) {
+            return res.status(400).json({ error: 'No cars available for booking' });
         }
 
-        const decoded = jwt.verify(token, JWT_SECRET);
-        const customerId = decoded.id; // Assuming the token contains the user ID
-
-        // Validate required fields
-        if (!car || !rentalStartDate || !rentalEndDate || !totalCost) {
-            return res.status(400).json({ error: 'Please provide all necessary booking details' });
-        }
-
-        // Create and save the new booking
+        // Create a new booking linked to the authenticated user
         const newBooking = new Booking({
-            car,
-            customer: customerId,
+            customer: req.user.id, // Access user ID from req.user (set by fetchUser middleware)
+            car: car._id, // Use the fetched car's ObjectId
             rentalStartDate,
             rentalEndDate,
             totalCost,
-            status: 'booked'
+            status: 'booked' // Set an initial status
         });
 
         await newBooking.save();
-
-        res.status(201).json({
-            message: 'Booking created successfully',
-            booking: newBooking
-        });
-    } catch (err) {
-        console.error('Error creating booking:', err); // Log the error for debugging
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(201).json({ message: 'Booking created successfully', booking: newBooking });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
 // GET /api/bookings - Get all bookings for the authenticated user
-router.get('/', async (req, res) => {
+router.get('/', fetchUser, async (req, res) => {
     try {
-        // Extract the token from the Authorization header
-        const token = req.headers.authorization?.split(' ')[1]; // Bearer token
-
-        // Verify the JWT token
-        if (!token) {
-            return res.status(401).json({ error: 'Token is missing' });
-        }
-
-        const decoded = jwt.verify(token, JWT_SECRET);
-        const customerId = decoded.id;
+        // The customer ID is already set by fetchUser middleware
+        const customerId = req.user.id;
 
         // Find all bookings for the authenticated user
         const bookings = await Booking.find({ customer: customerId }).populate('car');
@@ -75,6 +55,5 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 module.exports = router;

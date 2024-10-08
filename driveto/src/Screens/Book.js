@@ -6,7 +6,7 @@ import axios from 'axios'; // Make sure to install axios if you haven't already
 export default function Book() {
   
   const location = useLocation();
-  console.log('Received booking data:', location.state); //for consolelog
+  console.log('Received booking data:', location.state); // for console log
   const navigate = useNavigate();
   
   // State for confirmation dialog
@@ -36,26 +36,30 @@ export default function Book() {
   // Confirm booking
   const confirmBooking = async () => {
     try {
-      //const token = 'your_jwt_token'; // Replace with actual JWT token retrieval logic
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token'); // Retrieve the token from local storage
+  
+      // Ensure token exists
+      if (!token) {
+        alert('Token not found. Please login again.');
+        navigate('/login'); // Redirect to login if no token found
+        return;
+      }
+  
+      // Prepare the booking data with the token included in the body
       const bookingData = {
-        token,
+        token, // Include the token in the body
         car: car.name,
         rentalStartDate: bookingDetails.startDate,
         rentalEndDate: bookingDetails.endDate,
         totalCost: 100 // Replace with actual cost calculation logic
       };
-
-      const response = await axios.post('http://localhost:5000/api/bookings', bookingData,{
-        headers: {
-          Authorization: `Bearer ${token}` // Pass token in headers
-      }
-      });
-
+  
+      // Send the POST request with the booking data (including the token)
+      const response = await axios.post('http://localhost:5000/api/bookings', bookingData);
+  
       if (response.status === 201) {
         alert('Booking created successfully!');
-        // Redirect to another page if needed
-        navigate('/somewhere'); // Change to your desired route
+        navigate('/previous-bookings'); // Change to your desired route
       }
     } catch (error) {
       console.error('Error creating booking:', error);
