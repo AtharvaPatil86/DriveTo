@@ -26,11 +26,15 @@
   }
   
   /* Image styling */
-  .car-image {
-    width: 150px; /* Set width for car image */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 20px; /* Space between image and text */
-  }
+  /* Image styling */
+.car-image {
+  width: 250px; /* Set a smaller, fixed width for car image */
+  height: 250px; /* Set a fixed height for uniform appearance */
+  object-fit:contain; /* Ensures image fits within the box without distortion */
+  margin-right: 20px; /* Space between image and text */
+  border-radius: 5px; /* Optional: slight rounding for a cleaner look */
+}
+
   
   /* Car name and company at the top */
   .car-name {
