@@ -27,7 +27,7 @@ export default function CarTypes({ onSelectCar }) { // Add onSelectCar prop
         <div
           className={`car-box shadow-lg ${
             selectedCarIndex === index ? 'selected' : ''
-          }`}
+          }`} 
           key={index}
           onClick={() => handleCarClick(index)}
         >

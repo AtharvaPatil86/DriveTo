@@ -82,7 +82,7 @@ export default function Book() {
         {/* Car Information */}
         <div className="car-info">
           <h2>{car.name}</h2>
-          <img src={car.image} alt={`${car.name}`} className="car-image" />
+          <img src={car.image} alt={`${car.name}`} className="car-image1" />
           <p><strong>Capacity:</strong> {car.capacity} people</p>
         </div>
 
