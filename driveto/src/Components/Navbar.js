@@ -46,7 +46,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item mx-3">
               <NavLink className="nav-link" to="/Booking" end>
-                Ur bookings
+                Booking History
               </NavLink>
             </li>
             <li className="nav-item mx-3">

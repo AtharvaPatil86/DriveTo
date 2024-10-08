@@ -1,0 +1,60 @@
+.car-rental-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .options-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Adjusted for larger boxes */
+    margin-top: 40px;
+  }
+  
+  .option-box {
+    width: 500px; /* Increased width */
+    height: 400px; /* Increased height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .option-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Adds a dark overlay */
+    backdrop-filter: blur(5px); /* Slight blur effect on the background */
+    z-index: 1;
+  }
+  
+  .option-box:hover {
+    transform: scale(1.1);
+  }
+  
+  .regular {
+    background-image: url('../Images/swift-dzire.webp'); /* Put the path to your image */
+  }
+  
+  .luxury {
+    background-image: url('../Images/merc.webp'); /* Put the path to your image */
+  }
+  
+  h2 {
+    color: white; /* White text for both options */
+    position: relative;
+    z-index: 2;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
