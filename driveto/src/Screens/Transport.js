@@ -17,7 +17,7 @@ export default function Transport({ pickUpLocation, dropOffLocation, startDate, 
   };
 
   return (
-    <div className="container1 mt-5">
+    <div className="container2 mt-5">
       <div className="left-side">
         <LocationForm
           pickUpLocation={pickUpLocation}
