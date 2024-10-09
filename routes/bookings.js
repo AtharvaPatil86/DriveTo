@@ -37,10 +37,19 @@ router.post('/', fetchUser, async (req, res) => {
 });
 
 // GET /api/bookings - Get all bookings for the authenticated user
-router.get('/', fetchUser, async (req, res) => {
+// GET /api/bookings - Get all bookings for the authenticated user
+router.get('/', async (req, res) => {
     try {
-        // The customer ID is already set by fetchUser middleware
-        const customerId = req.user.id;
+        // Extract the token from the query parameters
+        const token = req.query.token;
+
+        if (!token) {
+            return res.status(401).json({ error: 'Token is missing' });
+        }
+
+        // Verify the JWT token
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const customerId = decoded.id;
 
         // Find all bookings for the authenticated user
         const bookings = await Booking.find({ customer: customerId }).populate('car');
@@ -51,9 +60,10 @@ router.get('/', fetchUser, async (req, res) => {
 
         res.json(bookings);
     } catch (err) {
-        console.error('Error fetching bookings:', err); // Log the error to the console
+        console.error('Error fetching bookings:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 module.exports = router;

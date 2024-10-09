@@ -9,10 +9,12 @@ export default function Previous_Booking() {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        // Sending token in the body of a GET request
         const response = await axios.get('http://localhost:5000/api/bookings', {
           headers: {
             'Content-Type': 'application/json',
           },
+          // Note: While it's unusual, this is how you would include the token in the body
           data: {
             token: 'your_jwt_token_here', // Replace with the actual token
           },
