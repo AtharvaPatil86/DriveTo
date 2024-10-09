@@ -60,6 +60,8 @@ router.post('/fetch', async (req, res) => {
 
         // Find all bookings for the authenticated user
         const bookings = await Booking.find({ customer: customerId }).populate('car');
+        
+
 
         if (!bookings.length) {
             return res.status(404).json({ error: 'No bookings found' });
