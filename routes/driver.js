@@ -1,13 +1,14 @@
+// routes/driverRoutes.js
 const express = require('express');
 const router = express.Router();
 const Driver = require('../models/Driver'); // Adjust path if needed
 
-// Define your routes here
+// Create a new driver
 router.post('/', async (req, res) => {
-    const { name, licenseNumber, phoneNumber } = req.body;
+    const { name, licenseNumber, phoneNumber, email, dateOfBirth } = req.body;
 
     try {
-        const newDriver = new Driver({ name, licenseNumber, phoneNumber });
+        const newDriver = new Driver({ name, licenseNumber, phoneNumber, email, dateOfBirth });
         await newDriver.save();
         res.status(201).json(newDriver);
     } catch (error) {
@@ -15,7 +16,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Other routes...
+// Additional routes (if needed)
+// e.g., get all drivers, get driver by ID, update driver, delete driver, etc.
 
 // Export the router
-module.exports = router; // Corrected line
+module.exports = router;

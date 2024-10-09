@@ -10,6 +10,9 @@ import Transport from './Screens/Transport';
 import Rent from './Screens/Rent';
 import Book from './Screens/Book';
 import Previous_Bookings from './Screens/Previous_Bookings';
+import CarRental from './Screens/Rent';
+import Luxury from './Screens/Luxury';
+import Regular from './Screens/Regular';
 
 import "./App.css";
 import { RegisterCar } from './Screens/RentYourCar'; // Correct import
@@ -29,9 +32,15 @@ function App() {
         <Route path="/rentacar" element={<Rent/>}/>
         <Route path="/book" element={<Book/>}/>
         <Route path="/Booking" element={<Previous_Bookings/>}/>
-        <Route path="/rent-your-car" element={<RegisterCar/>}/> {/* Use RegisterCar here */}
-      </Routes>
-    </Router>
+      
+      <Route path="/" element={<CarRental />} />
+      <Route path="/luxury" element={<Luxury />} />
+      <Route path="/regular" element={<Regular />} />
+      <Route path="/rent-your-car" element={<RegisterCar/>}/> {/* Use RegisterCar here */}
+    </Routes>
+  </Router>
+        
+      
   );
 }
 

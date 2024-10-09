@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './TruckTypes.css'; // Importing the CSS for styling
-import axios from 'axios'; // Assuming you're using Axios
+import threewheel from '../Images/threewheel.jpg';
+import mahindra from '../Images/mahindraTruck.webp';
+import Ashok from '../Images/Ashok.webp';
 
-export default function TruckTypes() {
-  const [trucks, setTrucks] = useState([]);
-
-  // Fetch truck data from backend (or you can use hardcoded data for now)
-  useEffect(() => {
-    axios.get('/api/trucks')  // Replace with your backend route
-      .then(response => {
-        setTrucks(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching truck data:', error);
-      });
-  }, []);
-
-  // Temporary data for testing
+export default function TruckTypes({ onSelectTruck }) {
   const tempTrucks = [
     {
       name: 'Three-Wheeler',
@@ -26,7 +14,7 @@ export default function TruckTypes() {
       capacity: 3,
       insurance: 'Basic',
       price: 800,
-      image: 'https://via.placeholder.com/150' // Replace with your actual image URL
+      image: `${threewheel}`
     },
     {
       name: 'Four-Wheeler Medium',
@@ -36,7 +24,7 @@ export default function TruckTypes() {
       capacity: 5,
       insurance: 'Comprehensive',
       price: 1200,
-      image: 'https://via.placeholder.com/150' // Replace with your actual image URL
+      image: `${mahindra}`
     },
     {
       name: 'Huge Truck',
@@ -46,14 +34,25 @@ export default function TruckTypes() {
       capacity: 10,
       insurance: 'Comprehensive',
       price: 2000,
-      image: 'https://via.placeholder.com/150' // Replace with your actual image URL
+      image: `${Ashok}`
     },
   ];
+
+  const [selectedTruckIndex, setSelectedTruckIndex] = useState(null);
+
+  const handleTruckClick = (index) => {
+    setSelectedTruckIndex(index);
+    onSelectTruck(tempTrucks[index]); // Pass the selected truck's data as input
+  };
 
   return (
     <div className="truck-types-container">
       {tempTrucks.map((truck, index) => (
-        <div className="truck-box shadow-lg" key={index}>
+        <div
+          className={`truck-box shadow-lg ${selectedTruckIndex === index ? 'selected' : ''}`}
+          key={index}
+          onClick={() => handleTruckClick(index)} // Handle truck click
+        >
           <img src={truck.image} alt={`${truck.name}`} className="truck-image" />
           <div className="details">
             <h3 className="truck-name">{truck.name} - {truck.company}</h3>

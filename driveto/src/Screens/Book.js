@@ -59,7 +59,7 @@ export default function Book() {
   
       if (response.status === 201) {
         alert('Booking created successfully!');
-        navigate('/previous-bookings'); // Change to your desired route
+        navigate('/Booking'); // Change to your desired route
       }
     } catch (error) {
       console.error('Error creating booking:', error);

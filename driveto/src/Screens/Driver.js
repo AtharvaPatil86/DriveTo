@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // You already imported axios, so let's use it
 
 export default function Work_Us() {
   const [driver, setDriver] = useState({
@@ -23,16 +23,14 @@ export default function Work_Us() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:<your_port>/api/drivers', { // Update the port number
-        method: 'POST',
+      // Using axios to send the POST request
+      const response = await axios.post('http://localhost:5000/api/drivers', driver, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(driver),
       });
 
-      const result = await response.json();
-      if (response.ok) {
+      if (response.status === 201) {
         alert('Driver created successfully!');
         setDriver({
           name: '',
@@ -43,7 +41,7 @@ export default function Work_Us() {
           rating: 0,
         });
       } else {
-        alert('Error: ' + result.message);
+        alert('Error: ' + response.data.message);
       }
     } catch (error) {
       console.error('Error:', error);

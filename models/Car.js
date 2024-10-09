@@ -1,40 +1,43 @@
+// models/Car.js
 const mongoose = require('mongoose');
 
 const CarSchema = new mongoose.Schema({
-    make: {
+    name: {
         type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        enum: ['Sedan', 'SUV', 'Mini', 'Truck'], // Added 'Truck'
-        required: true
-    },
-    truckCategory: {
-        type: String,
-        enum: ['Mini', 'Medium', 'Large'], // Sub-categories for Truck
-        required: function() {
-            return this.type === 'Truck'; // Required only if the type is 'Truck'
-        }
+        required: true,
+        trim: true,
     },
     model: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+    },
+    numberPlate: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+    },
+    insuranceNumber: {
+        type: String,
+        required: true,
+        trim: true,
     },
     year: {
         type: Number,
-        required: true
+        required: true,
     },
-    numberplate: {
+    category: {
         type: String,
-        required: true
+        enum: ['mini', 'sedan', 'SUV', 'truck'], // Add truck categories as necessary
+        required: true,
     },
-    
     status: {
         type: Boolean,
-        default: true // Assuming 'true' means available for rent
+        default: false, // false for available, true for booked/not available
     }
-    // Add other relevant fields here
+}, {
+    timestamps: true, // Automatically creates createdAt and updatedAt fields
 });
 
 module.exports = mongoose.model('Car', CarSchema);

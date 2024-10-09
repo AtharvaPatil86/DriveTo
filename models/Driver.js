@@ -1,3 +1,4 @@
+// models/Driver.js
 const mongoose = require('mongoose');
 
 const DriverSchema = new mongoose.Schema({
@@ -28,7 +29,6 @@ const DriverSchema = new mongoose.Schema({
         type: Date,
         required: true,
     }
-    
 }, {
     timestamps: true, // Automatically creates createdAt and updatedAt fields
 });

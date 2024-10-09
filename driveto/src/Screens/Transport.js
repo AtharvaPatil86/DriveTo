@@ -1,39 +1,35 @@
 import React, { useState } from 'react';
-import LocationForm from '../Components/LocationForm'; // Import the LocationForm
-import TruckTypes from '../Components/TruckTypes'; // Import the TruckTypes component
+import TruckTypes from '../Components/TruckTypes'; // Import TruckTypes
+import LocationForm from '../Components/LocationForm'; // Import LocationForm
+import './Transport.css'; // Import the CSS file
 
-const Transport = () => {
-  // Define the state for form data
-  const [formData, setFormData] = useState({
-    pickUpLocation: '',
-    dropOffLocation: '',
-    startDate: '',
-    endDate: ''
-  });
+export default function Transport({ pickUpLocation, dropOffLocation, startDate, endDate }) {
+  const [submittedData, setSubmittedData] = useState(null); // Store submitted booking info
+  const [selectedTruck, setSelectedTruck] = useState(null); // Store selected truck type
 
-  // Handle form submission from LocationForm component
-  const handleFormSubmit = (data) => {
-    setFormData(data); // Store the form data in state
-    console.log('Form submitted:', data);
+  const handleFormSubmit = (formData) => {
+    setSubmittedData(formData); // Save form data to display after form submission
+  };
+
+  // Function to handle truck selection
+  const handleTruckSelect = (truck) => {
+    setSelectedTruck(truck); // Save the selected truck
   };
 
   return (
     <div className="container1 mt-5">
       <div className="left-side">
-        {/* Pass down state variables and the form submission handler */}
         <LocationForm
-          pickUpLocation={formData.pickUpLocation}
-          dropOffLocation={formData.dropOffLocation}
-          startDate={formData.startDate}
-          endDate={formData.endDate}
-          onSubmit={handleFormSubmit}
+          pickUpLocation={pickUpLocation}
+          dropOffLocation={dropOffLocation}
+          startDate={startDate}
+          endDate={endDate}
+          onSubmit={handleFormSubmit} // Pass the form submission handler
+          selectedCar={selectedTruck} // Pass the selected truck to LocationForm as input
         />
       </div>
 
-      {/* Display truck types next to the form */}
-      <TruckTypes />
+      <TruckTypes onSelectTruck={handleTruckSelect} /> {/* Pass truck selection handler */}
     </div>
   );
-};
-
-export default Transport;
+}

@@ -1,53 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Previous_Bookings.css';
 
-export default function Previous_Booking() {
-  const [bookings, setBookings] = useState([]);
-  const [error, setError] = useState(null);
+const PreviousBookings = () => {
+    const [bookings, setBookings] = useState([]);
+    const [error, setError] = useState('');
+    const token = localStorage.getItem('token'); // Get the token from localStorage
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        // Sending token in the body of a GET request
-        const response = await axios.get('http://localhost:5000/api/bookings', {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          // Note: While it's unusual, this is how you would include the token in the body
-          data: {
-            token: 'your_jwt_token_here', // Replace with the actual token
-          },
-        });
-        setBookings(response.data);
-      } catch (err) {
-        setError(err.response?.data?.error || 'Failed to fetch bookings');
-        console.error('Error fetching bookings:', err);
-      }
-    };
+    useEffect(() => {
+        const fetchBookings = async () => {
+            if (!token) {
+                setError('No token found, please log in.');
+                return;
+            }
 
-    fetchBookings();
-  }, []);
+            try {
+                const response = await axios.post('http://localhost:5000/api/bookings/fetch', {
+                    token: token, // Include the token in the body
+                });
 
-  return (
-    <div className="previous-bookings-container">
-      <h1 className="title">Previous Bookings</h1>
-      {error && <p className="error-message">{error}</p>}
-      {bookings.length === 0 ? (
-        <p>No previous bookings found.</p>
-      ) : (
-        bookings.map((booking, index) => (
-          <div key={index} className="booking-box shadow-lg">
-            <h2 className="car-name">{booking.car.name}</h2>
-            <p><strong>Pick-up Location:</strong> {booking.pickUpLocation}</p>
-            <p><strong>Drop-off Location:</strong> {booking.dropOffLocation}</p>
-            <p><strong>Start Date:</strong> {new Date(booking.rentalStartDate).toLocaleDateString()}</p>
-            <p><strong>End Date:</strong> {new Date(booking.rentalEndDate).toLocaleDateString()}</p>
-            <p><strong>Total Cost:</strong> {booking.totalCost}</p>
-            <p><strong>Status:</strong> {booking.status}</p>
-          </div>
-        ))
-      )}
-    </div>
-  );
-}
+                setBookings(response.data); // Set the bookings data
+            } catch (err) {
+                console.error('Error fetching bookings:', err);
+                setError(err.response ? err.response.data.error : 'An error occurred');
+            }
+        };
+
+        fetchBookings(); // Call the fetch function
+    }, [token]);
+
+    return (
+        <div>
+            <h2>Previous Bookings</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
+            <ul>
+                {bookings.length > 0 ? (
+                    bookings.map((booking) => (
+                        <li key={booking._id}>
+                            <strong>Car:</strong> {booking.car.name} <br />
+                            <strong>Start:</strong> {new Date(booking.rentalStartDate).toLocaleString()} <br />
+                            <strong>End:</strong> {new Date(booking.rentalEndDate).toLocaleString()} <br />
+                        </li>
+                    ))
+                ) : (
+                    <li>No bookings found.</li> // Message for no bookings
+                )}
+            </ul>
+        </div>
+    );
+};
+
+export default PreviousBookings;

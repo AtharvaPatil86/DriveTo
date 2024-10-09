@@ -3,12 +3,21 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const Booking = require('../models/Booking'); // Booking model
 const Car = require('../models/Car'); // Import Car model to fetch car details
-const JWT_SECRET = 'your_secret_key'; // Replace with process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET; // Use the environment variable for JWT_SECRET
 const fetchUser = require('../middleware/fetchUser');
 
 // POST /api/bookings - Create a new booking
 router.post('/', fetchUser, async (req, res) => {
     const { rentalStartDate, rentalEndDate, totalCost } = req.body;
+
+    // Validate input dates
+    if (!rentalStartDate || !rentalEndDate || !totalCost) {
+        return res.status(400).json({ error: 'All fields are required.' });
+    }
+
+    if (new Date(rentalStartDate) >= new Date(rentalEndDate)) {
+        return res.status(400).json({ error: 'Start date must be before end date.' });
+    }
 
     try {
         // Fetch the first available car from the Car model
@@ -36,17 +45,15 @@ router.post('/', fetchUser, async (req, res) => {
     }
 });
 
-// GET /api/bookings - Get all bookings for the authenticated user
-// GET /api/bookings - Get all bookings for the authenticated user
-router.get('/', async (req, res) => {
+// POST /api/bookings/fetch - Get all bookings for the authenticated user
+router.post('/fetch', async (req, res) => {
+    const { token } = req.body; // Get the token from the request body
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
     try {
-        // Extract the token from the query parameters
-        const token = req.query.token;
-
-        if (!token) {
-            return res.status(401).json({ error: 'Token is missing' });
-        }
-
         // Verify the JWT token
         const decoded = jwt.verify(token, JWT_SECRET);
         const customerId = decoded.id;
@@ -64,6 +71,5 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 module.exports = router;
