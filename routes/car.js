@@ -16,6 +16,31 @@ router.post('/', async (req, res) => {
     }
 });
 
+
+
+// POST /api/cars/find-by-category - Find the first available car by category
+router.post('/find-by-category', async (req, res) => {
+    const { category } = req.body;  // Expect category in the request body
+
+    if (!category) {
+        return res.status(400).json({ message: 'Category is required' });
+    }
+
+    try {
+        // Search for the first available car in the given category
+        const car = await Car.findOne({ category: category, status: true });
+
+        if (!car) {
+            return res.status(404).json({ message: 'No available car found in this category' });
+        }
+
+        res.status(200).json(car);  // Send back the found car
+    } catch (error) {
+        console.error('Error finding car:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 // Additional routes (if needed)
 // e.g., get all cars, get car by ID, update car, delete car, etc.
 
