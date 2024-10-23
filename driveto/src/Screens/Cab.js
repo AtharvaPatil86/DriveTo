@@ -21,7 +21,7 @@ export default function Cab({ pickUpLocation, dropOffLocation, startDate, endDat
 
   return (
     <div className="container1 mt-5">
-      <div className="left-side">
+      <div className="left-side1">
         <LocationForm
           pickUpLocation={pickUpLocation}
           dropOffLocation={dropOffLocation}

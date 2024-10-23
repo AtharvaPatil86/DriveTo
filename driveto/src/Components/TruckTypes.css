@@ -1,7 +1,7 @@
 /* TruckTypes.css */
 
 /* Styling the container that holds all truck types */
-.truck-types-container {
+.truck-types-container2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center; /* Centers the truck boxes */
@@ -10,7 +10,7 @@
 }
 
 /* Each truck box container */
-.truck-box {
+.truck-box2 {
     width: 750px; /* Fixed width for the truck boxes */
     height: 250px;
     background-color: #ffffff;
@@ -24,7 +24,7 @@
 }
 
 /* Image styling */
-.truck-image {
+.truck-image2 {
     width: 150px; /* Set width for truck image */
     height: auto; /* Maintain aspect ratio */
     margin-right: 20px; /* Space between image and text */

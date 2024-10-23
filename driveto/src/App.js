@@ -13,7 +13,7 @@ import Previous_Bookings from './Screens/Previous_Bookings';
 import CarRental from './Screens/Rent';
 import Luxury from './Screens/Luxury';
 import Regular from './Screens/Regular';
-
+import Payment from './Screens/Payment';
 import "./App.css";
 import { RegisterCar } from './Screens/RentYourCar'; // Correct import
 
@@ -37,6 +37,7 @@ function App() {
       <Route path="/luxury" element={<Luxury />} />
       <Route path="/regular" element={<Regular />} />
       <Route path="/rent-your-car" element={<RegisterCar/>}/> {/* Use RegisterCar here */}
+      <Route path="/payment" element={<Payment/>}/>
     </Routes>
   </Router>
         

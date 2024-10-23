@@ -21,16 +21,16 @@ const carData = [
   { name: 'Polo', imgSrc: Polo },
   { name: 'Figo', imgSrc: Figo },
   { name: 'City', imgSrc: City },
-  { name: 'Ciaz', imgSrc: '/path-to-car6.jpg' },
-  { name: 'Vento', imgSrc: '/path-to-car7.jpg' },
-  { name: 'Rapid', imgSrc: '/path-to-car8.jpg' },
-  { name: 'Corolla', imgSrc: '/path-to-car9.jpg' },
-  { name: 'Creta', imgSrc: '/path-to-car10.jpg' },
-  { name: 'Ertiga', imgSrc: '/path-to-car11.jpg' },
-  { name: 'Innova', imgSrc: '/path-to-car12.jpg' },
-  { name: 'Scorpio', imgSrc: '/path-to-car13.jpg' },
-  { name: 'Fortuner', imgSrc: '/path-to-car14.jpg' },
-  { name: 'Tavera', imgSrc: '/path-to-car15.jpg' }
+  { name: 'Ciaz', imgSrc: Ciaz },
+  { name: 'Vento', imgSrc: Vento },
+  { name: 'Rapid', imgSrc: Rapid },
+  { name: 'Corolla', imgSrc: Corolla },
+  { name: 'Creta', imgSrc: Creta },
+  { name: 'Ertiga', imgSrc: Ertiga },
+  { name: 'Innova', imgSrc: Innova },
+  { name: 'Scorpio', imgSrc: Scorpio },
+  { name: 'Fortuner', imgSrc: Fortuner },
+  { name: 'Tavera', imgSrc: Tavera }
 ];
 
 const Regular = () => {

@@ -1,0 +1,52 @@
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .payment-card {
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .car-info {
+    margin-bottom: 20px;
+  }
+  
+  .car-info h3 {
+    font-size: 1.5rem;
+    color: #444;
+  }
+  
+  .amount-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #ff5722;
+  }
+  
+  .upi-section {
+    margin-top: 20px;
+  }
+  
+  .upi-scanner {
+    width: 200px;
+    height: 300px;
+    margin-bottom: 10px;
+  }
+  
+  .upi-section p {
+    font-size: 1rem;
+    color: #666;
+  }
+  

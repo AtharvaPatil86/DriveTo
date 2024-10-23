@@ -20,6 +20,7 @@ scheduleCarStatusUpdate();
 //Driver info
 const driverRoutes = require('./routes/driver');
 app.use('/api/drivers', driverRoutes);
+//////////////////////
 
 // Routes
 app.use('/api/auth', require('./routes/auth')); // Ensure 'auth' exports a router

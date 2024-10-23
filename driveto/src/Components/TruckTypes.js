@@ -46,14 +46,14 @@ export default function TruckTypes({ onSelectTruck }) {
   };
 
   return (
-    <div className="truck-types-container">
+    <div className="truck-types-container2">
       {tempTrucks.map((truck, index) => (
         <div
-          className={`truck-box shadow-lg ${selectedTruckIndex === index ? 'selected' : ''}`}
+          className={`truck-box2 shadow-lg ${selectedTruckIndex === index ? 'selected' : ''}`}
           key={index}
           onClick={() => handleTruckClick(index)} // Handle truck click
         >
-          <img src={truck.image} alt={`${truck.name}`} className="truck-image" />
+          <img src={truck.image} alt={`${truck.name}`} className="truck-image2" />
           <div className="details">
             <h3 className="truck-name">{truck.name} - {truck.company}</h3>
             <p><strong>Transmission:</strong> {truck.transmission}</p>

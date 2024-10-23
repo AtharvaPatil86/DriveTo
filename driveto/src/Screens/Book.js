@@ -31,6 +31,18 @@ export default function Book() {
   // Handle booking confirmation
   const handleBook = () => {
     setIsConfirming(true);
+    const amountToPay = 100; // Replace with actual logic to calculate total cost
+    navigate('/payment', {
+      state: {
+        bookingDetails: {
+          startDate: bookingDetails.startDate,
+          endDate: bookingDetails.endDate,
+          pickUpLocation: bookingDetails.pickUpLocation,
+          dropOffLocation: bookingDetails.dropOffLocation
+        },
+        amount: amountToPay
+      }
+    });
   };
 
   // Confirm booking
@@ -38,37 +50,36 @@ export default function Book() {
     try {
       const token = localStorage.getItem('token'); // Retrieve the token from local storage
   
-      // Ensure token exists
       if (!token) {
         alert('Token not found. Please login again.');
         navigate('/login'); // Redirect to login if no token found
         return;
       }
   
-      // Prepare the booking data with the token included in the body
       const bookingData = {
-        token, // Include the token in the body
+        token,
         car: car.name,
         rentalStartDate: bookingDetails.startDate,
         rentalEndDate: bookingDetails.endDate,
         totalCost: 100 // Replace with actual cost calculation logic
       };
   
-      // Send the POST request with the booking data (including the token)
       const response = await axios.post('http://localhost:5000/api/bookings', bookingData);
   
       if (response.status === 201) {
-        alert('Booking created successfully!');
+        alert('Car booked successfully!');
         navigate('/Booking'); // Change to your desired route
+      } else {
+        throw new Error('Booking failed. Please try again.');
       }
     } catch (error) {
       console.error('Error creating booking:', error);
-      alert('Failed to create booking. Please try again.');
+      alert('Error occurred while booking the car. Please try again.');
     } finally {
       setIsConfirming(false); // Close confirmation dialog
     }
   };
-
+  
   // Cancel booking
   const cancelBooking = () => {
     setIsConfirming(false);
@@ -96,7 +107,7 @@ export default function Book() {
         </div>
 
         {/* Book Button */}
-        <button className="btn btn-dark book-btn" onClick={handleBook}>Book</button>
+        <button className="btn btn-dark book-btn" onClick={handleBook}>Proceed to Payment</button>
 
         {/* Confirmation Dialog */}
         {isConfirming && (

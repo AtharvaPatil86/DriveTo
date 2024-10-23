@@ -1,33 +1,55 @@
-.previous-bookings-container {
-  text-align: center;
-  padding: 20px;
-}
+/* PreviousBookings.css */
 
-.title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.booking-box {
-  background-color: #f8f9fa;
+.booking-container {
+  max-width: 800px;
+  margin: auto;
+  margin-top: 30px;
   padding: 20px;
-  margin-bottom: 20px;
+  background-color: #f9f9f9;
   border-radius: 10px;
-  width: 100%; /* Full width of the container */
-  max-width: 700px; /* Limit the max width for better readability */
-  margin: 0 auto 20px auto; /* Center align the box */
-  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.car-name {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.booking-header {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-p {
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.booking-item {
+  margin-bottom: 20px;
+}
+
+.booking-card {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.booking-card strong {
+  color: #007bff;
+}
+
+.booking-card p {
   margin: 5px 0;
-}
-
-.shadow-lg {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

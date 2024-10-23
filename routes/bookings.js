@@ -15,17 +15,18 @@ const fetchCar = async (category) => {
 router.post('/', async (req, res) => {
     const { rentalStartDate, rentalEndDate, totalCost, token, category } = req.body; // Add token in the body
 
-    // Validate input dates
+    // Validate input dates and other required fields
     if (!rentalStartDate || !rentalEndDate || !totalCost || !token || !category) {
         return res.status(400).json({ error: 'All fields are required, including the token and category.' });
     }
 
+    // Check if the start date is before the end date
     if (new Date(rentalStartDate) >= new Date(rentalEndDate)) {
         return res.status(400).json({ error: 'Start date must be before end date.' });
     }
 
     try {
-        // Decode the token to get the customer ID
+        // Decode the JWT token to get the customer ID
         const decoded = jwt.verify(token, JWT_SECRET);
         const customerId = decoded.id;
 
@@ -33,35 +34,28 @@ router.post('/', async (req, res) => {
         const car = await fetchCar(category); // Call the fetchCar function
 
         if (!car) {
-            return res.status(404).json({ error: 'No available car found in this category' });
+            return res.status(404).json({ error: 'No available car found in this category.' });
         }
 
-        // Create a new booking linked to the authenticated user and fetched car
-        const newBooking = async () => {
-            try {
-                const bookingData = {
-                    rentalStartDate: bookingDetails.startDate,
-                    rentalEndDate: bookingDetails.endDate,
-                    totalCost: bookingDetails.totalCost, // Make sure this field exists
-                    token: yourToken, // Ensure you have the JWT token here
-                    category: car.category, // Make sure the category exists
-                };
-        
-                console.log('Booking Data:', bookingData); // Log the data to be sent
-        
-                const response = await axios.post('http://localhost:5000/api/bookings', bookingData);
-                console.log('Booking confirmed:', response.data);
-            } catch (error) {
-                console.error('Error creating booking:', error);
-                // Handle error appropriately
-            }
-        };
-        
+        // Create a new booking linked to the authenticated user and the fetched car
+        const newBooking = new Booking({
+            customer: customerId,  // Access user ID from the decoded token
+            car: car._id,          // Use the fetched car's ObjectId
+            rentalStartDate,
+            rentalEndDate,
+            totalCost,
+            status: 'booked'       // Set an initial status
+        });
 
+        // Save the new booking to the database
         await newBooking.save();
+
+        // Return a success response with the newly created booking
         res.status(201).json({ message: 'Booking created successfully', booking: newBooking });
     } catch (error) {
         console.error('Error creating booking:', error.message);
+
+        // Handle token expiration or other errors
         if (error.name === 'TokenExpiredError') {
             res.status(401).json({ message: 'JWT token expired' });
         } else {
@@ -69,5 +63,50 @@ router.post('/', async (req, res) => {
         }
     }
 });
+router.get('/available', async (req, res) => {
+    try {
+      const availableCars = await Car.find({ status: 0 });
+      res.json(availableCars);
+    } catch (error) {
+      res.status(500).send('Server Error');
+    }
+  });
 
+
+router.post('/fetch', async (req, res) => {
+    const { token } = req.body;
+
+    // Check if the token exists
+    if (!token) {
+        return res.status(400).json({ error: 'Token is required' });
+    }
+
+    try {
+        // Decode the token to get the user ID
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.id;
+
+        // Log the decoded user ID to ensure it's being extracted correctly
+        console.log('Decoded User ID:', userId);
+
+        // Fetch bookings linked to this user
+        const bookings = await Booking.find({ customer: userId }).populate('car');
+
+        // Log the retrieved bookings
+        console.log('Bookings found:', bookings);
+
+        if (!bookings || bookings.length === 0) {
+            return res.status(404).json({ error: 'No bookings found for this user' });
+        }
+
+        res.status(200).json({ bookings });
+    } catch (error) {
+        console.error('Error fetching bookings:', error.message);
+        if (error.name === 'TokenExpiredError') {
+            res.status(401).json({ error: 'JWT token expired' });
+        } else {
+            res.status(500).json({ error: 'Server error' });
+        }
+    }
+});
 module.exports = router;
