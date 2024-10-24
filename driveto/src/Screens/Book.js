@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Book.css'; // Import your custom CSS for styling
 import axios from 'axios'; // Make sure to install axios if you haven't already
+import Map from '../Components/map'; // Import the Map component
+
+// Function to convert locations to coordinates using a geocoding API
+const getCoordinates = async (location) => {
+  const apiKey = '53cdbaad17174f8fbd6c7a87af00e1cd'; // Replace with your API key
+  const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${apiKey}`);
+  
+  if (response.data.results.length > 0) {
+    const { lat, lng } = response.data.results[0].geometry;
+    return { lat, lng };
+  } else {
+    throw new Error('Location not found');
+  }
+};
 
 export default function Book() {
-  
   const location = useLocation();
-  console.log('Received booking data:', location.state); // for console log
   const navigate = useNavigate();
   
   // State for confirmation dialog
@@ -27,6 +39,27 @@ export default function Book() {
 
   const car = location.state?.car || defaultCar;
   const bookingDetails = location.state?.bookingDetails || defaultBookingDetails;
+
+  // State to store coordinates for the map
+  const [startCoordinates, setStartCoordinates] = useState({ lat: 40.7128, lng: -74.0060 }); // Default: NYC
+  const [endCoordinates, setEndCoordinates] = useState({ lat: 34.0522, lng: -118.2437 }); // Default: LA
+
+  // Fetch coordinates when the component mounts or when booking details change
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      try {
+        const startLoc = await getCoordinates(bookingDetails.pickUpLocation);
+        const endLoc = await getCoordinates(bookingDetails.dropOffLocation);
+
+        setStartCoordinates(startLoc);
+        setEndCoordinates(endLoc);
+      } catch (error) {
+        console.error('Error fetching coordinates:', error);
+      }
+    };
+
+    fetchCoordinates();
+  }, [bookingDetails.pickUpLocation, bookingDetails.dropOffLocation]);
 
   // Handle booking confirmation
   const handleBook = () => {
@@ -79,7 +112,7 @@ export default function Book() {
       setIsConfirming(false); // Close confirmation dialog
     }
   };
-  
+
   // Cancel booking
   const cancelBooking = () => {
     setIsConfirming(false);
@@ -104,6 +137,14 @@ export default function Book() {
           <p><strong>Drop-off Location:</strong> {bookingDetails.dropOffLocation}</p>
           <p><strong>Start Date:</strong> {bookingDetails.startDate}</p>
           <p><strong>End Date:</strong> {bookingDetails.endDate}</p>
+        </div>
+
+        {/* Map Integration */}
+        <div className="map-container">
+          <Map 
+            startLocation={startCoordinates} 
+            endLocation={endCoordinates} 
+          />
         </div>
 
         {/* Book Button */}
