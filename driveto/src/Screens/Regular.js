@@ -39,8 +39,8 @@ const Regular = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   // Function to handle car click and navigate to booking page
-  const handleCarClick = (carName) => {
-    navigate(`/booking/${carName}`); // Navigate to booking page with car name in the URL
+  const handleCarClick = (car) => {
+    navigate('/book', { state: { car } }); // Pass car data in state
   };
 
   return (
@@ -50,7 +50,7 @@ const Regular = () => {
           <div
             className="car-card"
             key={index}
-            onClick={() => handleCarClick(car.name)} // Call handleCarClick when a car is clicked
+            onClick={() => handleCarClick(car)} // Call handleCarClick with car object
             style={{ cursor: 'pointer' }} // Change the cursor to pointer to indicate it's clickable
           >
             <img src={car.imgSrc} alt={car.name} className="car-image2" />

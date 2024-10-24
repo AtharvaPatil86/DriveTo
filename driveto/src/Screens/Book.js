@@ -24,13 +24,6 @@ export default function Book() {
   // State for confirmation dialog
   const [isConfirming, setIsConfirming] = useState(false);
 
-  const defaultCar = {
-    name: 'Default Car Model',
-    image: 'https://via.placeholder.com/400x200?text=Car+Image',
-    capacity: 5,
-    baseRate: 100 // Base rate per day (you can customize this)
-  };
-  
   const defaultBookingDetails = {
     pickUpLocation: 'New York City',
     dropOffLocation: 'Los Angeles',
@@ -38,7 +31,14 @@ export default function Book() {
     endDate: '2024-10-20'
   };
 
-  const car = location.state?.car || defaultCar;
+  // Retrieve car data passed through navigation state
+  const car = location.state?.car || {
+    name: 'Default Car Model',
+    imgSrc: 'https://via.placeholder.com/400x200?text=Car+Image',
+    capacity: 5,
+    baseRate: 100 // Base rate per day (you can customize this)
+  };
+  
   const bookingDetails = location.state?.bookingDetails || defaultBookingDetails;
 
   // State to store coordinates for the map
@@ -72,18 +72,10 @@ export default function Book() {
       console.error('Invalid dates:', bookingDetails.startDate, bookingDetails.endDate);
       return 0;
     }
-
-    // Log the parsed dates
-    console.log('Start Date:', startDate);
-    console.log('End Date:', endDate);
     
     const rentalDays = Math.ceil((endDate - startDate) / (1000 * 3600 * 24)); // Use Math.ceil for rounding up rental days
     
-    // Log the rental days calculated
-    console.log('Rental Days:', rentalDays);
-    
     const totalCost = rentalDays * car.baseRate; // Calculate total cost
-    console.log('Total Cost:', totalCost); // Log the total cost
 
     return totalCost > 0 ? totalCost : 0; // Ensure cost is non-negative
   };
@@ -122,7 +114,7 @@ export default function Book() {
         {/* Car Information */}
         <div className="car-info">
           <h2>{car.name}</h2>
-          <img src={car.image} alt={`${car.name}`} className="car-image1" />
+          <img src={car.imgSrc} alt={`${car.name}`} className="car-image1" />
           <p><strong>Capacity:</strong> {car.capacity} people</p>
         </div>
 
