@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // You already imported axios, so let's use it
+import axios from 'axios';
 
 export default function Work_Us() {
   const [driver, setDriver] = useState({
@@ -11,6 +11,9 @@ export default function Work_Us() {
     rating: 0,
   });
 
+  const [loading, setLoading] = useState(false); // Loading state to handle submission
+  const [errors, setErrors] = useState({}); // To store validation errors
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDriver({
@@ -19,11 +22,31 @@ export default function Work_Us() {
     });
   };
 
+  const validateFields = () => {
+    const newErrors = {};
+    if (!driver.name) newErrors.name = "Name is required.";
+    if (!driver.licenseNumber) newErrors.licenseNumber = "License number is required.";
+    if (!driver.phoneNumber) newErrors.phoneNumber = "Phone number is required.";
+    if (!/^\d+$/.test(driver.phoneNumber)) newErrors.phoneNumber = "Phone number must contain only digits.";
+    if (!driver.email) newErrors.email = "Email is required.";
+    if (!/\S+@\S+\.\S+/.test(driver.email)) newErrors.email = "Invalid email format.";
+    if (!driver.dateOfBirth) newErrors.dateOfBirth = "Date of birth is required.";
+    return newErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const validationErrors = validateFields();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setLoading(true); // Start loading
+    setErrors({}); // Clear previous errors
+
     try {
-      // Using axios to send the POST request
       const response = await axios.post('http://localhost:5000/api/drivers', driver, {
         headers: {
           'Content-Type': 'application/json',
@@ -44,8 +67,10 @@ export default function Work_Us() {
         alert('Error: ' + response.data.message);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.response?.data || error.message);
       alert('An error occurred. Please try again.');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -64,6 +89,7 @@ export default function Work_Us() {
             onChange={handleChange}
             required
           />
+          {errors.name && <small className="text-danger">{errors.name}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="licenseNumber">License Number:</label>
@@ -76,6 +102,7 @@ export default function Work_Us() {
             onChange={handleChange}
             required
           />
+          {errors.licenseNumber && <small className="text-danger">{errors.licenseNumber}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="phoneNumber">Phone Number:</label>
@@ -88,6 +115,7 @@ export default function Work_Us() {
             onChange={handleChange}
             required
           />
+          {errors.phoneNumber && <small className="text-danger">{errors.phoneNumber}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -100,6 +128,7 @@ export default function Work_Us() {
             onChange={handleChange}
             required
           />
+          {errors.email && <small className="text-danger">{errors.email}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="dateOfBirth">Date of Birth:</label>
@@ -112,6 +141,7 @@ export default function Work_Us() {
             onChange={handleChange}
             required
           />
+          {errors.dateOfBirth && <small className="text-danger">{errors.dateOfBirth}</small>}
         </div>
         <div className="form-group">
           <label htmlFor="rating">Rating (0 to 5):</label>
@@ -127,8 +157,8 @@ export default function Work_Us() {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-dark" style={{ width: '170px' }}>
-          Create Driver
+        <button type="submit" className="btn btn-dark" style={{ width: '170px' }} disabled={loading}>
+          {loading ? 'Creating...' : 'Create Driver'}
         </button>
       </form>
     </div>

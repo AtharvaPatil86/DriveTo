@@ -15,7 +15,7 @@ import Luxury from './Screens/Luxury';
 import Regular from './Screens/Regular';
 import Payment from './Screens/Payment';
 import "./App.css";
-import { RegisterCar } from './Screens/RentYourCar'; // Correct import
+import RegisterCar from './Screens/RentYourCar'; // Correct import
 
 function App() {
   return (
