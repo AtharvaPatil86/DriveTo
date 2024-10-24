@@ -27,7 +27,8 @@ export default function Book() {
   const defaultCar = {
     name: 'Default Car Model',
     image: 'https://via.placeholder.com/400x200?text=Car+Image',
-    capacity: 5
+    capacity: 5,
+    baseRate: 100 // Base rate per day (you can customize this)
   };
   
   const defaultBookingDetails = {
@@ -61,10 +62,40 @@ export default function Book() {
     fetchCoordinates();
   }, [bookingDetails.pickUpLocation, bookingDetails.dropOffLocation]);
 
+  // Calculate total cost based on rental duration
+  const calculateTotalCost = () => {
+    const startDate = new Date(bookingDetails.startDate);
+    const endDate = new Date(bookingDetails.endDate);
+    
+    // Check if the dates are valid
+    if (isNaN(startDate) || isNaN(endDate)) {
+      console.error('Invalid dates:', bookingDetails.startDate, bookingDetails.endDate);
+      return 0;
+    }
+
+    // Log the parsed dates
+    console.log('Start Date:', startDate);
+    console.log('End Date:', endDate);
+    
+    const rentalDays = Math.ceil((endDate - startDate) / (1000 * 3600 * 24)); // Use Math.ceil for rounding up rental days
+    
+    // Log the rental days calculated
+    console.log('Rental Days:', rentalDays);
+    
+    const totalCost = rentalDays * car.baseRate; // Calculate total cost
+    console.log('Total Cost:', totalCost); // Log the total cost
+
+    return totalCost > 0 ? totalCost : 0; // Ensure cost is non-negative
+  };
+
   // Handle booking confirmation
   const handleBook = () => {
     setIsConfirming(true);
-    const amountToPay = 100; // Replace with actual logic to calculate total cost
+  };
+
+  // Confirm booking and redirect to payment page
+  const confirmBooking = () => {
+    const amountToPay = calculateTotalCost(); // Calculate the total cost dynamically
     navigate('/payment', {
       state: {
         bookingDetails: {
@@ -76,41 +107,6 @@ export default function Book() {
         amount: amountToPay
       }
     });
-  };
-
-  // Confirm booking
-  const confirmBooking = async () => {
-    try {
-      const token = localStorage.getItem('token'); // Retrieve the token from local storage
-  
-      if (!token) {
-        alert('Token not found. Please login again.');
-        navigate('/login'); // Redirect to login if no token found
-        return;
-      }
-  
-      const bookingData = {
-        token,
-        car: car.name,
-        rentalStartDate: bookingDetails.startDate,
-        rentalEndDate: bookingDetails.endDate,
-        totalCost: 100 // Replace with actual cost calculation logic
-      };
-  
-      const response = await axios.post('http://localhost:5000/api/bookings', bookingData);
-  
-      if (response.status === 201) {
-        alert('Car booked successfully!');
-        navigate('/Booking'); // Change to your desired route
-      } else {
-        throw new Error('Booking failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error creating booking:', error);
-      alert('Error occurred while booking the car. Please try again.');
-    } finally {
-      setIsConfirming(false); // Close confirmation dialog
-    }
   };
 
   // Cancel booking
@@ -137,6 +133,7 @@ export default function Book() {
           <p><strong>Drop-off Location:</strong> {bookingDetails.dropOffLocation}</p>
           <p><strong>Start Date:</strong> {bookingDetails.startDate}</p>
           <p><strong>End Date:</strong> {bookingDetails.endDate}</p>
+          <p><strong>Total Cost:</strong> ₹{calculateTotalCost()}</p> {/* Display the total cost */}
         </div>
 
         {/* Map Integration */}

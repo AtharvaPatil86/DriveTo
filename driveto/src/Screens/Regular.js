@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './Regular.css'; // Add your custom CSS here
 import Swift from '../Images/swift.webp';
 import WagonR from '../Images/WagonR.jpg';
@@ -15,6 +16,7 @@ import Innova from '../Images/innova.jpeg';
 import Scorpio from '../Images/scorpio.jpg';
 import Fortuner from '../Images/fortuner.jpg';
 import Tavera from '../Images/tavera.jpeg';
+
 const carData = [
   { name: 'Swift', imgSrc: Swift },
   { name: 'WagonR', imgSrc: WagonR },
@@ -34,12 +36,23 @@ const carData = [
 ];
 
 const Regular = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Function to handle car click and navigate to booking page
+  const handleCarClick = (carName) => {
+    navigate(`/booking/${carName}`); // Navigate to booking page with car name in the URL
+  };
+
   return (
     <div className="regular-container">
-      
       <div className="car-grid">
         {carData.map((car, index) => (
-          <div className="car-card" key={index}>
+          <div
+            className="car-card"
+            key={index}
+            onClick={() => handleCarClick(car.name)} // Call handleCarClick when a car is clicked
+            style={{ cursor: 'pointer' }} // Change the cursor to pointer to indicate it's clickable
+          >
             <img src={car.imgSrc} alt={car.name} className="car-image2" />
             <h2 className="car-name">{car.name}</h2>
           </div>
