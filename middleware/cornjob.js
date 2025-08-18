@@ -2,23 +2,34 @@ const cron = require('node-cron');
 const Booking = require('../models/Booking');
 const Car = require('../models/Car');
 
-// This function will check expired bookings every minute
-function scheduleCarStatusUpdate() {
-    cron.schedule('* * * * *', async () => {
-        const now = new Date();
+/**
+ * Schedule a task to run every minute.
+ * It checks for expired bookings (where rentalEndDate has passed and status is 'in-progress'),
+ * updates their status to 'completed', and sets the associated car's availability to true.
+ */
+const scheduleCarStatusUpdate = () => {
+  cron.schedule('* * * * *', async () => {
+    try {
+      const now = new Date();
 
-        const expiredBookings = await Booking.find({ 
-            rentalEndDate: { $lte: now }, 
-            status: 'in-progress' 
-        });
+      // Find bookings that have expired and are still in-progress
+      const expiredBookings = await Booking.find({
+        rentalEndDate: { $lte: now },
+        status: 'in-progress',
+      });
 
-        for (let booking of expiredBookings) {
-            await Booking.findByIdAndUpdate(booking._id, { status: 'completed' });
-            await Car.findByIdAndUpdate(booking.car, { status: true });
-
-            console.log(`Updated booking ${booking._id} and car ${booking.car} to available`);
-        }
-    });
-}
+      // Update each expired booking and its associated car
+      await Promise.all(
+        expiredBookings.map(async ({ _id, car }) => {
+          await Booking.findByIdAndUpdate(_id, { status: 'completed' });
+          await Car.findByIdAndUpdate(car, { status: true });
+          console.log(`✔ Booking ${_id} marked as completed. Car ${car} set to available.`);
+        })
+      );
+    } catch (err) {
+      console.error('✖ Error updating car status:', err.message);
+    }
+  });
+};
 
 module.exports = scheduleCarStatusUpdate;
