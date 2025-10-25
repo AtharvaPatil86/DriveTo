@@ -60,7 +60,7 @@ export default function Options() {
           >
             <img
               src={transportImage}
-              alt="Transport"
+              alt="Transports"
               className="card-img-top"
               style={{ height: '300px', objectFit: 'cover' }}
             />
